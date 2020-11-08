@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	 xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+
+		<p:panel header="Kalkulator">
+
+			<p:messages id="msg" />
+	<h:form id="bla">
+  <h:panelGrid id="grid" columns="1" cellpadding="5" >	
+  		<p:outputLabel for="Kwota" value="Kwota przed podatkiem:" />
+        <p:inputText id="Kwota" value="#{vatBB.kwota}" 
+        required="true" requiredMessage="Musisz podać kwotę"
+        converterMessage="Kwota musi być liczbą"
+        validatorMessage="Kwota musi być większa niż 0">
+        <f:validateLongRange minimum="0"/>
+        </p:inputText>
+        <p:message for="Kwota" />  		
+  		<p:outputLabel for="typPodatku" value="Typ Podatku: " />
+  		<p:selectOneMenu id = "typPodatku" value = "#{vatBB.typ}"> 
+   			<f:selectItem itemValue = "netto-brutto" itemLabel = "netto-brutto" /> 
+   			<f:selectItem itemValue = "brutto-netto" itemLabel = "brutto-netto" /> 
+		</p:selectOneMenu> 
+		<p:outputLabel for="procent" value = "Oprocentowanie: " /> 
+		<p:selectOneMenu id="procent" value = "#{vatBB.procent}"> 
+   			<f:selectItem itemValue = "3" itemLabel = "3%" /> 
+   			<f:selectItem itemValue = "5" itemLabel = "5%" /> 
+   			<f:selectItem itemValue = "7" itemLabel = "7%" /> 
+   			<f:selectItem itemValue = "8" itemLabel = "8%" /> 
+   			<f:selectItem itemValue = "22" itemLabel = "22%" /> 
+   			<f:selectItem itemValue = "23" itemLabel = "23%" /> 
+		</p:selectOneMenu> 
+		<p:messages id="msg" />
+
+		<p:commandButton value="Oblicz" action="#{vatBB.calc()}" update="@form"/>
+		<br />
+		<br />
+</h:panelGrid>	
+	</h:form>
+</p:panel>
+
+	</ui:define>
+
+</ui:composition>
+</html>
